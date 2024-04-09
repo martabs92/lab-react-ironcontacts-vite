@@ -20,6 +20,22 @@ function addRandomContact() {
   });
 }
 
+function SortByName() {
+  const sortedNames = [...contacts].sort((a,b) => a.name.localeCompare(b.name));
+  setContacts(sortedNames);
+}
+
+function sortPopularity() {
+  const sortedPopularity = [...contacts].sort((a,b) => b.popularity - a.popularity);
+  setContacts(sortedPopularity);
+}
+
+function deleteContacts(index) {
+  const deleteContact = [...contacts];
+  deleteContact.splice(index, 1);
+  setContacts(deleteContact);
+}
+
   return (
     <div className="App">
       <h1>LAB | React IronContacts</h1>
@@ -32,6 +48,7 @@ function addRandomContact() {
             <th>Popularity</th>
             <th>Won Oscar</th>
             <th>Won Emmy</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -42,14 +59,11 @@ function addRandomContact() {
               <td>{contact.popularity.toFixed(2)}</td>
               <td>{contact.wonOscar ? '🏆' : null}</td>
               <td>{contact.wonEmmy ? '🌟' : null}</td>
+              <td><button onClick={deleteContacts}>Delete</button></td>
             </tr>
           ))}
         </tbody>
-
-
-
       </table>
-
     </div>
   );
 }
